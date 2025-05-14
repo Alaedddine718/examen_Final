@@ -9,4 +9,13 @@ class TestProceso(unittest.TestCase):
         self.assertEqual(p.prioridad, 2)
         self.assertEqual(p.tiempo_restante, 5)
 
+    def test_pid_vacio(self):
+        with self.assertRaises(ValueError):
+            Proceso("", 5, 1)
 
+    def test_duracion_invalida(self):
+        with self.assertRaises(ValueError):
+            Proceso("P2", -3, 1)
+
+if __name__ == "__main__":
+    unittest.main()
