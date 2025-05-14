@@ -27,4 +27,32 @@ def main():
             proceso = Proceso(pid, dur, prio)
             repo.agregar(proceso)
 
-    
+        elif opcion == "2":
+            mostrar_procesos(repo.listar())
+
+        elif opcion == "3":
+            repo.guardar_json("procesos.json")
+            print("Guardado en procesos.json")
+
+        elif opcion == "4":
+            repo.cargar_json("procesos.json")
+            print("Cargado desde procesos.json")
+
+        elif opcion == "5":
+            scheduler = FCFSScheduler()
+            gantt = scheduler.planificar(repo.listar())
+            print("Diagrama de Gantt:", gantt)
+            print("Métricas:", calcular_metricas(repo.listar()))
+
+        elif opcion == "6":
+            q = int(input("Quantum: "))
+            scheduler = RoundRobinScheduler(q)
+            gantt = scheduler.planificar(repo.listar())
+            print("Diagrama de Gantt:", gantt)
+            print("Métricas:", calcular_metricas(repo.listar()))
+
+        elif opcion == "0":
+            break
+
+if __name__ == "__main__":
+    main()
