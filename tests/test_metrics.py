@@ -16,4 +16,5 @@ class TestMetrics(unittest.TestCase):
         self.assertAlmostEqual(metricas["retorno_media"], 3.0)
         self.assertAlmostEqual(metricas["espera_media"], 1.0)
 
-
+if __name__ == "__main__":
+    unittest.main()
