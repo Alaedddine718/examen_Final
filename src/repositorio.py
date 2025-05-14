@@ -35,4 +35,25 @@ class RepositorioProcesos:
         with open(archivo, 'w') as f:
             json.dump(datos, f)
 
-    
+    def cargar_json(self, archivo):
+        with open(archivo, 'r') as f:
+            datos = json.load(f)
+        self.procesos = []
+        for d in datos:
+            proceso = Proceso(d["pid"], d["duracion"], d["prioridad"])
+            self.procesos.append(proceso)
+
+    def guardar_csv(self, archivo):
+        with open(archivo, 'w', newline='') as f:
+            writer = csv.writer(f, delimiter=';')
+            writer.writerow(['pid', 'duracion', 'prioridad'])
+            for p in self.procesos:
+                writer.writerow([p.pid, p.duracion, p.prioridad])
+
+    def cargar_csv(self, archivo):
+        with open(archivo, 'r') as f:
+            reader = csv.DictReader(f, delimiter=';')
+            self.procesos = []
+            for fila in reader:
+                proceso = Proceso(fila['pid'], int(fila['duracion']), int(fila['prioridad']))
+                self.procesos.append(proceso)
